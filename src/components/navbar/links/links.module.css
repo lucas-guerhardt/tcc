@@ -9,3 +9,38 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.mobileLinks{
+    display: none;
+}
+
+.burger{
+    display: none;
+}
+
+@media (max-width: 768px){
+    .links{
+        display: none;
+    }
+
+    .burger{
+        display: block;
+        cursor: pointer;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .mobileLinks{
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 50%;
+        height: calc(100vh - 100px);
+        background-color: var(--bgSoft);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+}
