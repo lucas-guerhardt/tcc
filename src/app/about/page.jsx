@@ -17,7 +17,8 @@ const AboutPage = () => {
                     src="/about.png" 
                     alt="About Image" 
                     fill
-                    priority={false}
+                    sizes="max-width: 100%"
+                    priority={true}
                     className={styles.aboutImg}
                 />
             </div>

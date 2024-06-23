@@ -38,16 +38,16 @@
 
     .mobileLinks{
         position: absolute;
-        top: 100px;
+        top: 0px;
         right: 0;
-        width: 50%;
-        height: calc(100vh - 100px);
+        width: 35%;
+        height: calc(100vh);
         background-color: var(--bgSoft);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 50px;
         z-index: 2;
     }
 }

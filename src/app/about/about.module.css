@@ -31,3 +31,9 @@
 .aboutImg{
     object-fit: contain;
 }
+
+@media (max-width: 1024px){
+    .imgContainer{
+        display: none;
+    }
+}
