@@ -13,3 +13,10 @@
 .text{
     font-size: smaller;
 }
+
+@media(max-width: 800px){
+    .container{
+        flex-direction: column;
+        gap: 10px;
+    }
+}
