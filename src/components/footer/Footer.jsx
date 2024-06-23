@@ -1,6 +1,11 @@
+import styles from './footer.module.css';
+
 const Footer = () => {
     return(
-        <div>Footer</div>
+        <div className={styles.container}>
+            <div className={styles.logo}>pindev</div>
+            <div className={styles.text}>Desenvolvido com amor ♥ por Lucas Pinheiro. Agradecimentos a <a href="https://www.youtube.com/@LamaDev" target="_blank" rel="noopener noreferrer">LamaDev</a>© All rights reserved.</div>
+        </div>
     );
 }
 

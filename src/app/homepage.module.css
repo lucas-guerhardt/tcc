@@ -4,17 +4,58 @@
 }
 
 .brands{
+    display: flex;
+    align-items: center;
+    width: 25px;
+    height: auto;
+    gap: 10px;
+}
+
+.inImg{
+    filter: invert(0.5) brightness(0.8);
     width: 20px;
     height: 20px;
-    position: relative;
-    filter: invert(0.8);
-    filter: brightness(0.5);
+}
+
+.ghImg{
+    filter: invert(0.8) brightness(0.5);
+    width: 20px;
+    height: 20px;
 }
 
 .title{
     font-size: 96px;
     font-weight: 700;
     color: var(--text)
+}
+
+.buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.button{
+    border: none;
+    padding: 20px;
+    min-width: 120px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:first-child{
+    background-color: var(--btn);
+    color: var(--text);
+    font-size: 15px;
+}
+
+.button:last-child{
+    background-color: var(--bgSoft);
+    color: var(--text);
+    font-size: 15px;
+}
+
+.desc{
+    font-size: 20px;
 }
 
 .txtContainer{

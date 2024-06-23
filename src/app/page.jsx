@@ -5,15 +5,20 @@ const Home = () => {
   return <div className={styles.container}>
     <div className={styles.txtContainer}>
       <h1 className={styles.title}>Você está a um sopro da clareza.</h1>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis harum, aliquid laboriosam explicabo dolor odit soluta?
-        Illum excepturi ex rerum dolores? Aut asperiores ad porro adipisci? Ipsa dolor veniam rerum?
+      <p className={styles.desc}>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis harum, aliquid laboriosam explicabo dolor odit soluta?
       </p>
-      <div>
-        <button className={styles.btn}>Saiba Mais</button>
-        <button className={styles.btn}>Contato</button>
+      <div className={styles.buttons}>
+        <button className={styles.button}>Comece Já</button>
+        <button className={styles.button}>Saiba Mais</button>
       </div>
       <div className={styles.brands}>
-        <Image src="/linkedin.png" alt="" fill className={styles.brandsImg}/>
+        <a href="https://www.linkedin.com/in/lucas-guerhardt-7a558a237/" target="_blank" rel="noopener noreferrer">
+          <Image src="/linkedin.png" alt="LinkedIn" width={25} height={25} className={styles.inImg}/>
+        </a>
+        <a href="https://github.com/pinheiroo" target="_blank" rel="noopener noreferrer">
+          <Image src="/github.png" alt="GitHub" width={25} height={25} className={styles.ghImg}/>
+        </a>
       </div>
     </div>
     <div className={styles.imgContainer}>
