@@ -3,9 +3,23 @@ import styles from "./about.module.css";
 
 const AboutPage = () => {
     return (
-        <div>
+        <div className={styles.container}>
+            <div className={styles.textContainer}>
+                <h2 className={styles.title}>Sobre mim</h2>
+                <h1 className={styles.biggerTitle}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
+                <p className={styles.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quisquam illum 
+                    error repellendus nemo impedit deserunt numquam ratione maiores enim, rerum aut asperiores quas! 
+                    Reiciendis maxime repellendus veritatis officiis placeat.
+                </p>
+            </div> 
             <div className={styles.imgContainer}>
-                <Image src="https://images.pexels.com/photos/25539612/pexels-photo-25539612/free-photo-of-cidade-meio-urbano-arte-construcao.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" fill/>
+                <Image 
+                    src="/about.png" 
+                    alt="About Image" 
+                    fill
+                    priority={false}
+                    className={styles.aboutImg}
+                />
             </div>
         </div>
     );
