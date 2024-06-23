@@ -7,10 +7,10 @@ import NavLink from "./navLink/navLink";
 const Links = () => {
     const [open, setOpen] = useState(false);
     const links = [
-        { name: "Homepage", path: "/" },
-        { name: 'About', path: "/about" },
-        { name: "Rate", path: "/rate" },
-        { name: "Practice", path: "/practice"},
+        { name: "Página Inicial", path: "/" },
+        { name: "Pratique", path: "/practice"},
+        { name: "Avalie-me", path: "/rate" },
+        { name: 'Sobre', path: "/about" },
     ];
 
     const session = true;
@@ -24,10 +24,10 @@ const Links = () => {
                 session ? (
                     <>
                         {admin && <NavLink item={{name: "Admin", path: "/admin"}}/>}
-                        <button className={styles.logout}>Logout</button>
+                        <button className={styles.logout}>Sair</button>
                     </>
                 ) : (
-                    <NavLink item={{name: "Login", path: "/login"}}/>
+                    <NavLink item={{name: "Entrar", path: "/login"}}/>
                 )
             }
             </div>
