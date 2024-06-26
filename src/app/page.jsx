@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter }from "next/navigation";
 import styles from "./homepage.module.css";
 
 const Home = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.txtContainer}>
@@ -10,8 +15,8 @@ const Home = () => {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis harum, aliquid laboriosam explicabo dolor odit soluta?
         </p>
         <div className={styles.buttons}>
-          <button className={styles.button}>Comece Já</button>
-          <button className={styles.button}>Saiba Mais</button>
+          <button className={styles.button} onClick={() => router.push("/practice")}>Comece Já</button>
+          <button className={styles.button} onClick={() => router.push("/about")}>Saiba Mais</button>
         </div>
         <div className={styles.brands}>
           <a href="https://www.linkedin.com/in/lucas-guerhardt-7a558a237/" target="_blank" rel="noopener noreferrer">

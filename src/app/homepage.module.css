@@ -8,7 +8,7 @@
     align-items: center;
     width: 25px;
     height: auto;
-    gap: 10px;
+    gap: 20px;
 }
 
 .inImg{
@@ -71,6 +71,22 @@
 }
 
 @media(max-width: 1280px) {
+    .title{
+        font-size: 72px;
+    }
+
+    .inImg{
+        width: 30px;
+        height: 30px;
+    }
+
+    .ghImg{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media(max-width: 1024px) {
     .imgContainer{
         display: none;
     }
