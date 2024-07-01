@@ -1,13 +1,13 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Navbar from "@/components/navbar/Navbar"
-import Footer from "@/components/footer/Footer"
+import Navbar from "@/components/navbar/navbar"
+import Footer from "@/components/footer/footer"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Next App',
-  description: 'Next.js starter app',
+  title: 'INSIGHT',
+  description: 'Plataforma com o intuito de alavancar o aprendizado de análise combinatópria e probabilidade.',
 }
 
 export default function RootLayout({ children }) {

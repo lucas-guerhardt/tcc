@@ -41,7 +41,7 @@
         top: 0px;
         right: 0;
         width: 35%;
-        height: calc(100vh);
+        height: 100%;
         background-color: var(--bgSoft);
         display: flex;
         flex-direction: column;
