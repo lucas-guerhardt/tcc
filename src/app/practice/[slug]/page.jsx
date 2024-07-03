@@ -1,6 +1,19 @@
 import Image from "next/image";
 import styles from "./single-exercise.module.css";
-const SingleExcercisePage = () => {
+
+const getData = async (slug) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+};
+
+const SingleExcercisePage = async ({ params }) => {
+  const { slug } = params;
+  console.log(slug);
+  const post = await getData(slug);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -12,13 +25,8 @@ const SingleExcercisePage = () => {
         />
       </div>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Title</h1>
-        <p className={styles.desc}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-          esse neque laboriosam accusamus sequi corrupti harum atque ab unde
-          sint, hic dolore quisquam, id exercitationem voluptatem tempore
-          numquam, accusantium nemo!
-        </p>
+        <h1 className={styles.title}>{post.title}</h1>
+        <p className={styles.desc}>{post.body}</p>
       </div>
     </div>
   );

@@ -14,17 +14,12 @@ const PostCard = ({ post }) => {
             className={styles.img}
           />
         </div>
-        <span className={styles.date}>post.date</span>
+        <span className={styles.date}>{post.id}</span>
       </div>
       <div className={styles.bottom}>
-        <h3 className={styles.title}>post.title</h3>
-        <p className={styles.desc}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi officia
-          minima a mollitia nam assumenda architecto, sed dolorum?
-          Necessitatibus incidunt nobis doloremque similique enim eligendi sit
-          neque asperiores blanditiis non.
-        </p>
-        <Link className={styles.link} href="/practice/post">
+        <h3 className={styles.title}>{post.title}</h3>
+        <p className={styles.desc}>{post.body}</p>
+        <Link className={styles.link} href={`/practice/${post.id}`}>
           Ver Mais
         </Link>
       </div>
