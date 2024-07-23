@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  gap: 100px;
+}
+
+.imgContainer {
+  flex: 1;
+  position: relative;
+  height: calc(100vh - 200px);
+}
+
+.textContainer {
+  flex: 2;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.title {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.desc {
+  display: flex;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+@media screen and (max-width: 1280px) {
+  .imgContainer {
+    flex: 1;
+    position: relative;
+    height: calc(75vh - 200px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .imgContainer {
+    flex: 1;
+    position: relative;
+    height: calc(50vh - 200px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .imgContainer {
+    display: none;
+  }
+}

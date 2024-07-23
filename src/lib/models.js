@@ -31,26 +31,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const postSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-    },
-    img: {
-      type: String,
-    },
-    slug: {
-      type: String,
-      unique: true,
-    },
-  },
-  { timestamps: true }
-);
-
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
-
-export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);

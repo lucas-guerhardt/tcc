@@ -1,20 +1,15 @@
 import Image from "next/image";
+import styles from "./permutation.module.css";
 import { getPost } from "@/lib/data";
-import styles from "./single-exercise.module.css";
 
-export const generateMetadata = async ({ params }) => {
-  const { slug } = params;
-  const post = await getPost(slug);
-  return {
-    title: post.title,
-    description: post.desc,
-  };
+export const metadata = {
+  title: "Permutação",
+  description:
+    "Aqui você pode praticar exercícios de permutação e aprender mais sobre o assunto",
 };
 
-const SingleExcercisePage = async ({ params }) => {
-  const { slug } = params;
-  console.log(slug);
-  const post = await getPost(slug);
+const PermutationPage = async () => {
+  const post = await getPost("permutation");
   return (
     <div className={styles.container}>
       {post.img && (
@@ -30,4 +25,4 @@ const SingleExcercisePage = async ({ params }) => {
   );
 };
 
-export default SingleExcercisePage;
+export default PermutationPage;
