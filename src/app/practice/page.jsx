@@ -1,19 +1,15 @@
+import { getPosts } from "@/lib/data";
 import styles from "./practice.module.css";
 import PostCard from "@/components/post-card/post-card";
 
-const getData = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    next: { revalidade: 3600 },
-  });
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return res.json();
+export const metadata = {
+  title: "Pratique",
+  description:
+    "Agora que você já aprendeu, é hora de praticar! Aqui você encontra exercícios para fixar o conteúdo aprendido!",
 };
 
 const PracticePage = async () => {
-  const posts = await getData();
+  const posts = await getPosts();
   return (
     <div className={styles.container}>
       {posts.map((post) => (
