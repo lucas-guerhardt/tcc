@@ -11,7 +11,7 @@ const PostCard = ({ post }) => {
             <Image src={post.img} alt="" fill className={styles.img} />
           </div>
         )}
-        <span className={styles.date}>{post.id}</span>
+        <span className={styles.date}>{post.last_modified}</span>
       </div>
       <div className={styles.bottom}>
         <h3 className={styles.title}>{post.title}</h3>

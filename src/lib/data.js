@@ -26,10 +26,12 @@ export const getUser = async (id) => {
 };
 
 export const getPosts = async () => {
+  noStore();
   return [
     {
       id: 0,
       slug: "permutation",
+      last_modified: "2024",
       title: "Permutação",
       description:
         "Aqui você pode praticar exercícios de permutação e aprender mais sobre o assunto",
@@ -39,7 +41,7 @@ export const getPosts = async () => {
 };
 
 export const getPost = async (slug) => {
+  noStore();
   const posts = await getPosts();
-  console.log(posts.find((post) => post.slug === slug));
   return posts.find((post) => post.slug === slug);
 };
