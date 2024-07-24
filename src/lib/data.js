@@ -3,6 +3,7 @@ import { Post, User } from "./models";
 import { unstable_noStore as noStore } from "next/cache";
 
 export const getPosts = async () => {
+  noStore();
   try {
     connectToDatabase();
     const posts = await Post.find();
@@ -14,6 +15,7 @@ export const getPosts = async () => {
 };
 
 export const getPost = async (slug) => {
+  noStore();
   try {
     connectToDatabase();
     const post = await Post.findOne({ slug });
@@ -25,6 +27,7 @@ export const getPost = async (slug) => {
 };
 
 export const getUsers = async () => {
+  noStore();
   try {
     connectToDatabase();
     const posts = await User.find();
