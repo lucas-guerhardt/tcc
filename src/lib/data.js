@@ -2,7 +2,7 @@
 
 import { connectToDatabase } from "./utils";
 import { Post, User } from "./models";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
 export const createPost = async (formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
@@ -16,6 +16,7 @@ export const createPost = async (formData) => {
       slug,
     });
     await newPost.save();
+    revalidatePath("/practice");
     return newPost;
   } catch (error) {
     console.log(error);
