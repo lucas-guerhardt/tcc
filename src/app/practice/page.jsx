@@ -21,8 +21,8 @@ const PracticePage = async () => {
   return (
     <div className={styles.container}>
       {posts.map((post) => (
-        <div className={styles.post}>
-          <PostCard key={post.id} post={post} />
+        <div key={post.id} className={styles.post}>
+          <PostCard post={post} />
         </div>
       ))}
     </div>
