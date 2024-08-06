@@ -2,9 +2,17 @@ import Image from "next/image";
 import { getPost } from "@/lib/data";
 import styles from "./single-exercise.module.css";
 
+export const getData = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/practice/${slug}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch posts");
+  }
+  return res.json();
+};
+
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getData(slug);
   return {
     title: post.title,
     description: post.desc,
@@ -13,7 +21,7 @@ export const generateMetadata = async ({ params }) => {
 
 const SingleExcercisePage = async ({ params }) => {
   const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getData(slug);
   return (
     <div className={styles.container}>
       {post.img && (

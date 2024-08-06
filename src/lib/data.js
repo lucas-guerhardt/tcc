@@ -1,3 +1,5 @@
+// mudar conforme precisar
+
 "use server";
 
 import { connectToDatabase } from "./utils";
@@ -21,28 +23,6 @@ export const createPost = async (formData) => {
   } catch (error) {
     console.log(error);
     throw new Error("Failed to create post");
-  }
-};
-
-export const getPosts = async () => {
-  try {
-    connectToDatabase();
-    const posts = await Post.find();
-    return posts;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to fetch posts");
-  }
-};
-
-export const getPost = async (slug) => {
-  try {
-    connectToDatabase();
-    const post = await Post.findOne({ slug });
-    return post;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to fetch post!");
   }
 };
 
