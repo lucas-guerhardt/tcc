@@ -1,9 +1,13 @@
-const LoginPage = () => {
-    return (
-        <div>
-        <h1>Login</h1>
-        </div>
-    );
-}
+import { handleGoogleLogin } from "@/lib/action";
+
+const LoginPage = async () => {
+  return (
+    <div>
+      <form action={handleGoogleLogin}>
+        <button>Login With Google</button>
+      </form>
+    </div>
+  );
+};
 
 export default LoginPage;
