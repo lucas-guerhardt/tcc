@@ -1,5 +1,3 @@
-// mudar conforme precisar
-
 "use server";
 
 import { connectToDatabase } from "./utils";
@@ -23,6 +21,28 @@ export const createPost = async (formData) => {
   } catch (error) {
     console.log(error);
     throw new Error("Failed to create post");
+  }
+};
+
+export const getPost = async (slug) => {
+  try {
+    connectToDatabase();
+    const post = await Post.findOne({ slug });
+    return post;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch post");
+  }
+};
+
+export const getPosts = async () => {
+  try {
+    connectToDatabase();
+    const posts = await Post.find();
+    return posts;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch posts");
   }
 };
 
@@ -56,25 +76,6 @@ export const deletePost = async (formData) => {
   }
 };
 
-export const createUser = async (formData) => {
-  const { name, email, password, role } = Object.fromEntries(formData);
-
-  try {
-    connectToDatabase();
-    const newUser = new User({
-      name,
-      email,
-      password,
-      role,
-    });
-    await newUser.save();
-    return newUser;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to create user");
-  }
-};
-
 export const getUsers = async () => {
   noStore();
   try {
@@ -87,11 +88,11 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (id) => {
+export const getUser = async ({ id }) => {
   noStore();
   try {
     connectToDatabase();
-    const user = await User.findById(id);
+    const user = await User.findById({ id });
     return user;
   } catch (error) {
     console.log(error);
@@ -99,13 +100,13 @@ export const getUser = async (id) => {
   }
 };
 
-export const updateUser = async (id, formData) => {
+export const updateUser = async ({ id }, formData) => {
   const { name, email, password, role } = Object.fromEntries(formData);
 
   try {
     connectToDatabase();
     const user = await User.findByIdAndUpdate(
-      id,
+      { id },
       { name, email, password, role },
       { new: true }
     );
@@ -116,10 +117,10 @@ export const updateUser = async (id, formData) => {
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteUser = async ({ id }) => {
   try {
     connectToDatabase();
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete({ id });
     return user;
   } catch (error) {
     console.log(error);

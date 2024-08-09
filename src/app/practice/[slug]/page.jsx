@@ -10,23 +10,18 @@ export const getData = async (slug) => {
   return res.json();
 };
 
-export const generateMetadata = async ({ params }) => {
-  const { slug } = params;
-  const post = await getData(slug);
-  return {
-    title: post.title,
-    description: post.desc,
-  };
-};
-
 const SingleExcercisePage = async ({ params }) => {
   const { slug } = params;
-  const post = await getData(slug);
+  const post = await getPost(slug);
   return (
     <div className={styles.container}>
-      {post.img && (
+      {post.img ? (
         <div className={styles.imgContainer}>
           <Image src={post.img} alt="" fill className={styles.img} />
+        </div>
+      ) : (
+        <div className={styles.imgContainer}>
+          <Image src="/PadraoIA.webp" alt="" fill className={styles.img} />
         </div>
       )}
       <div className={styles.textContainer}>

@@ -6,9 +6,13 @@ const PostCard = ({ post }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        {post.img && (
+        {post.img ? (
           <div className={styles.imgContainer}>
             <Image src={post.img} alt="" fill className={styles.img} />
+          </div>
+        ) : (
+          <div className={styles.imgContainer}>
+            <Image src="/PadraoIA.webp" alt="" fill className={styles.img} />
           </div>
         )}
         <span className={styles.date}>{post.id}</span>
