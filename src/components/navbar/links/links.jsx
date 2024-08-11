@@ -6,7 +6,7 @@ import NavLink from "./navLink/navLink";
 import Image from "next/image";
 import { handleLogout } from "@/lib/action";
 
-const Links = ({ session }) => {
+const Links = ({ user }) => {
   const [open, setOpen] = useState(false);
   const mobileMenuRef = useRef(null);
   const links = [
@@ -32,18 +32,15 @@ const Links = ({ session }) => {
   const handleLinkClick = () => {
     setOpen(false);
   };
-
-  const admin = true;
-
   return (
     <div className={styles.container}>
       <div className={styles.links}>
         {links.map((links) => (
           <NavLink item={links} key={links.name} />
         ))}
-        {session?.user ? (
+        {user ? (
           <>
-            {session.user?.admin && (
+            {user?.isAdmin && (
               <NavLink item={{ name: "Admin", path: "/admin" }} />
             )}
             <form action={handleLogout}>
@@ -67,9 +64,9 @@ const Links = ({ session }) => {
               <NavLink item={link} key={link.name} />
             </div>
           ))}
-          {session ? (
+          {user ? (
             <>
-              {admin && (
+              {user?.isAdmin && (
                 <div key={links.name} onClick={handleLinkClick}>
                   <NavLink item={{ name: "Admin", path: "/admin" }} />
                 </div>

@@ -3,6 +3,7 @@
 import { connectToDatabase } from "./utils";
 import { Post, User } from "./models";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { auth } from "./auth";
 
 export const createPost = async (formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
@@ -88,11 +89,11 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async ({ id }) => {
+export const getUser = async (email) => {
   noStore();
   try {
     connectToDatabase();
-    const user = await User.findById({ id });
+    const user = await User.findOne({ email });
     return user;
   } catch (error) {
     console.log(error);
@@ -100,30 +101,24 @@ export const getUser = async ({ id }) => {
   }
 };
 
-export const updateUser = async ({ id }, formData) => {
-  const { name, email, password, role } = Object.fromEntries(formData);
-
+export const getAuth = async () => {
+  const session = await auth();
+  if (!session) return null;
   try {
     connectToDatabase();
-    const user = await User.findByIdAndUpdate(
-      { id },
-      { name, email, password, role },
-      { new: true }
-    );
+    const userNotFormatted = await User.findOne({ email: session.user.email });
+    const user = {
+      id: userNotFormatted._id.toString(),
+      username: userNotFormatted.username,
+      email: userNotFormatted.email,
+      img: userNotFormatted.img,
+      isAdmin: userNotFormatted.isAdmin,
+      createdAt: userNotFormatted.createdAt,
+      updatedAt: userNotFormatted.updatedAt,
+    };
     return user;
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to update user");
-  }
-};
-
-export const deleteUser = async ({ id }) => {
-  try {
-    connectToDatabase();
-    const user = await User.findByIdAndDelete({ id });
-    return user;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to delete user");
+    throw new Error("Failed to fetch user!");
   }
 };

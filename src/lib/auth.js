@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { connectToDatabase } from "./utils";
 import { User } from "./models";
+import { authConfig } from "./auth.config";
 
 export const {
   handlers: { GET, POST },
@@ -9,6 +10,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  ...authConfig,
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -16,8 +18,8 @@ export const {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (account.provider == "google" && profile.email_verified) {
+    async signIn({ account, profile }) {
+      if (account.provider == "google") {
         connectToDatabase();
         try {
           const user = await User.findOne({ email: profile.email });
@@ -26,6 +28,7 @@ export const {
               username: profile.name,
               email: profile.email,
               img: profile.picture,
+              isAdmin: false,
             });
 
             await newUser.save();
@@ -34,11 +37,9 @@ export const {
           console.log(error);
           return false;
         }
-      } else {
-        await signOut();
-        return false;
       }
       return true;
     },
+    ...authConfig.callbacks,
   },
 });
