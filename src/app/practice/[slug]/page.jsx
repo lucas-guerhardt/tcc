@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getPost } from "@/lib/data";
+import { getPostBySlug } from "@/lib/data";
 import styles from "./single-exercise.module.css";
 
 export const getData = async (slug) => {
@@ -12,7 +12,7 @@ export const getData = async (slug) => {
 
 const SingleExcercisePage = async ({ params }) => {
   const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getPostBySlug(slug);
   return (
     <div className={styles.container}>
       {post.img ? (

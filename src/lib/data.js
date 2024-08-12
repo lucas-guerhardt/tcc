@@ -5,30 +5,60 @@ import { Post, User } from "./models";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { auth } from "./auth";
 
-export const createPost = async (formData) => {
+export const createPost = async (prevState, formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
-
   try {
-    connectToDatabase();
-    const newPost = new Post({
-      title,
-      description,
-      img,
-      slug,
-    });
-    await newPost.save();
-    revalidatePath("/practice");
-    return newPost;
+    if (!(await getPostBySlug(slug))) {
+      connectToDatabase();
+      const newPost = new Post({
+        title,
+        description,
+        img,
+        slug,
+      });
+      await newPost.save();
+      revalidatePath("/practice");
+      revalidatePath("/admin");
+    }
   } catch (error) {
     console.log(error);
     throw new Error("Failed to create post");
   }
 };
 
-export const getPost = async (slug) => {
+export const getPost = async (id) => {
   try {
     connectToDatabase();
-    const post = await Post.findOne({ slug });
+    let post = await Post.findById({ id });
+    post = {
+      id: post._id.toString(),
+      title: post.title,
+      description: post.description,
+      img: post.img,
+      slug: post.slug,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+    };
+    return post;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch post");
+  }
+};
+
+export const getPostBySlug = async (slug) => {
+  try {
+    connectToDatabase();
+    let post = await Post.findOne({ slug });
+    post = {
+      id: post._id.toString(),
+      title: post.title,
+      description: post.description,
+      img: post.img,
+      slug: post.slug,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+    };
     return post;
   } catch (error) {
     console.log(error);
@@ -39,7 +69,16 @@ export const getPost = async (slug) => {
 export const getPosts = async () => {
   try {
     connectToDatabase();
-    const posts = await Post.find();
+    let posts = await Post.find();
+    posts = posts.map((post) => ({
+      id: post._id.toString(),
+      title: post.title,
+      description: post.description,
+      img: post.img,
+      slug: post.slug,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+    }));
     return posts;
   } catch (error) {
     console.log(error);
@@ -47,17 +86,18 @@ export const getPosts = async () => {
   }
 };
 
-export const updatePost = async (formData) => {
+export const updatePost = async (prevState, formData) => {
   const { id, title, description, img, slug } = Object.fromEntries(formData);
 
   try {
     connectToDatabase();
-    const post = await Post.findByIdAndUpdate(
+    await Post.findByIdAndUpdate(
       id,
       { title, description, img, slug },
       { new: true }
     );
-    return post;
+    revalidatePath("/practice");
+    revalidatePath("/admin");
   } catch (error) {
     console.log(error);
     throw new Error("Failed to update post");
@@ -65,12 +105,12 @@ export const updatePost = async (formData) => {
 };
 
 export const deletePost = async (formData) => {
-  const { slug } = Object.fromEntries(formData);
-  const { id } = await getPost(slug);
+  const { id } = Object.fromEntries(formData);
   try {
     connectToDatabase();
-    const post = await Post.findByIdAndDelete(id);
-    return post;
+    await Post.findByIdAndDelete(id);
+    revalidatePath("/practice");
+    revalidatePath("/admin");
   } catch (error) {
     console.log(error);
     throw new Error("Failed to delete post");
@@ -78,11 +118,19 @@ export const deletePost = async (formData) => {
 };
 
 export const getUsers = async () => {
-  noStore();
   try {
     connectToDatabase();
-    const posts = await User.find();
-    return posts;
+    let users = await User.find();
+    users = users.map((user) => ({
+      id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      img: user.img,
+      isAdmin: user.isAdmin,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    }));
+    return users;
   } catch (error) {
     console.log(error);
     throw new Error("Failed to fetch users");
@@ -90,10 +138,18 @@ export const getUsers = async () => {
 };
 
 export const getUser = async (email) => {
-  noStore();
   try {
     connectToDatabase();
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
+    user = {
+      id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      img: user.img,
+      isAdmin: user.isAdmin,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
     return user;
   } catch (error) {
     console.log(error);
@@ -104,21 +160,18 @@ export const getUser = async (email) => {
 export const getAuth = async () => {
   const session = await auth();
   if (!session) return null;
+  const user = await getUser(session.user.email);
+  return user;
+};
+
+export const deleteUser = async (formData) => {
+  const { id } = Object.fromEntries(formData);
   try {
     connectToDatabase();
-    const userNotFormatted = await User.findOne({ email: session.user.email });
-    const user = {
-      id: userNotFormatted._id.toString(),
-      username: userNotFormatted.username,
-      email: userNotFormatted.email,
-      img: userNotFormatted.img,
-      isAdmin: userNotFormatted.isAdmin,
-      createdAt: userNotFormatted.createdAt,
-      updatedAt: userNotFormatted.updatedAt,
-    };
-    return user;
+    await User.findByIdAndDelete(id);
+    revalidatePath("/admin");
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to fetch user!");
+    throw new Error("Failed to delete post");
   }
 };
