@@ -1,4 +1,4 @@
-import { createPost, deletePost } from "@/lib/data";
+import { createPost, deletePost, getAuth } from "@/lib/data";
 
 export const metadata = {
   title: "Admin",
@@ -7,6 +7,12 @@ export const metadata = {
 };
 
 const AdminPage = () => {
+  const user = getAuth();
+
+  if (!user || !user.isAdmin) {
+    return null;
+  }
+
   return (
     <div>
       <h1>Admin Page</h1>
