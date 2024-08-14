@@ -26,7 +26,7 @@ const SingleExcercisePage = async ({ params }) => {
       )}
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post.title}</h1>
-        <p className={styles.desc}>{post.desc}</p>
+        <p className={styles.desc}>{post.description}</p>
         {(post.slug == "permutation" && (
           <div className={styles.exampleContainer}>
             <h2 className={styles.exampleTitle}>Exemplo</h2>

@@ -2,24 +2,24 @@
 
 import { connectToDatabase } from "./utils";
 import { Post, User } from "./models";
-import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { unstable_noStore as revalidatePath } from "next/cache";
 import { auth } from "./auth";
 
-export const createPost = async (prevState, formData) => {
+export const createPost = async (formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
+  const postAlreadyExists = await getPostBySlug(slug);
+  if (!!postAlreadyExists) throw new Error("Slug already exists");
   try {
-    if (!(await getPostBySlug(slug))) {
-      connectToDatabase();
-      const newPost = new Post({
-        title,
-        description,
-        img,
-        slug,
-      });
-      await newPost.save();
-      revalidatePath("/practice");
-      revalidatePath("/admin");
-    }
+    connectToDatabase();
+    const newPost = new Post({
+      title,
+      description,
+      img,
+      slug,
+    });
+    await newPost.save();
+    revalidatePath("/practice");
+    revalidatePath("/admin");
   } catch (error) {
     console.log(error);
     throw new Error("Failed to create post");
@@ -127,6 +127,8 @@ export const getUsers = async () => {
       email: user.email,
       img: user.img,
       isAdmin: user.isAdmin,
+      isStudent: user.isStudent,
+      rankPoints: user.rankPoints,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }));
@@ -137,7 +139,7 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (email) => {
+export const getUserByEmail = async (email) => {
   try {
     connectToDatabase();
     let user = await User.findOne({ email });
@@ -147,6 +149,30 @@ export const getUser = async (email) => {
       email: user.email,
       img: user.img,
       isAdmin: user.isAdmin,
+      isStudent: user.isStudent,
+      rankPoints: user.rankPoints,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch user!");
+  }
+};
+
+export const getUser = async (id) => {
+  try {
+    connectToDatabase();
+    let user = await User.findById(id);
+    user = {
+      id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      img: user.img,
+      isAdmin: user.isAdmin,
+      isStudent: user.isStudent,
+      rankPoints: user.rankPoints,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
@@ -160,8 +186,22 @@ export const getUser = async (email) => {
 export const getAuth = async () => {
   const session = await auth();
   if (!session) return null;
-  const user = await getUser(session.user.email);
+  const user = await getUserByEmail(session.user.email);
   return user;
+};
+
+export const setStudent = async (id, status) => {
+  try {
+    connectToDatabase();
+    await User.findByIdAndUpdate(id, { isStudent: status });
+    const user = await getUser(id);
+    revalidatePath("/admin");
+    revalidatePath("/practice");
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to set student");
+  }
 };
 
 export const deleteUser = async (formData) => {

@@ -1,9 +1,18 @@
+"use client";
 import { deletePost, getPosts } from "@/lib/data";
 import styles from "./adminPosts.module.css";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const AdminPosts = async () => {
-  const posts = await getPosts();
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    getPosts().then((data) => setPosts(data));
+  }, []);
+
+  const atualizaPagina = () => {
+    window.location.reload();
+  };
 
   return (
     <div className={styles.container}>
@@ -21,7 +30,9 @@ const AdminPosts = async () => {
           </div>
           <form action={deletePost}>
             <input type="hidden" name="id" value={post.id} />
-            <button className={styles.postButton}>Delete</button>
+            <button className={styles.postButton} onClick={atualizaPagina}>
+              Remover
+            </button>
           </form>
         </div>
       ))}

@@ -22,6 +22,14 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isStudent: {
+      type: Boolean,
+      default: false,
+    },
+    rankPoints: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

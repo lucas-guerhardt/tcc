@@ -1,12 +1,14 @@
 "use client";
 import { createPost } from "@/lib/data";
 import styles from "./adminPostForm.module.css";
-import { useFormState } from "react-dom";
 
 const AdminPostForm = async () => {
-  const [state, formAction] = useFormState(createPost, undefined);
+  const atualizaPagina = () => {
+    window.location.reload();
+  };
+
   return (
-    <form action={formAction} className={styles.container}>
+    <form action={createPost} className={styles.container}>
       <h1>Adicionar Atividade</h1>
       <p>*Falar com desenvolvedor para mais detalhes</p>
       <input type="text" name="title" placeholder="Título" />
@@ -18,8 +20,7 @@ const AdminPostForm = async () => {
         placeholder="Descrição"
         rows={10}
       />
-      <button>Adicionar</button>
-      {state && state.error}
+      <button onClick={atualizaPagina}>Adicionar</button>
     </form>
   );
 };
