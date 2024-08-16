@@ -1,16 +1,28 @@
+"use client";
 import { getAuth, getPosts } from "@/lib/data";
 import styles from "./practice.module.css";
 import PostCard from "@/components/post-card/post-card";
-
-export const metadata = {
-  title: "Pratique",
-  description:
-    "Agora que você já aprendeu, é hora de praticar! Aqui você encontra exercícios para fixar o conteúdo aprendido!",
-};
+import { useEffect, useState } from "react";
 
 const PracticePage = async () => {
-  const posts = await getPosts();
-  const user = await getAuth();
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getAuth().then((data) => setUser(data));
+  }, []);
+
+  useEffect(() => {
+    getPosts().then((data) => setPosts(data));
+  }, []);
+
+  useEffect(() => {
+    document.title = "Pratique | INSIGHT";
+  }, []);
+
+  if (user === null) {
+    return <p>Loading...</p>;
+  }
 
   if (!user.isStudent) {
     return (

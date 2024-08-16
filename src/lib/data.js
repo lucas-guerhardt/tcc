@@ -7,8 +7,6 @@ import { auth } from "./auth";
 
 export const createPost = async (formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
-  const postAlreadyExists = await getPostBySlug(slug);
-  if (!!postAlreadyExists) throw new Error("Slug already exists");
   try {
     connectToDatabase();
     const newPost = new Post({

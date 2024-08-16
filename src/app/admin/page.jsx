@@ -1,19 +1,32 @@
-import { createPost, deletePost, getAuth } from "@/lib/data";
+"use client";
+import { getAuth } from "@/lib/data";
 import { redirect } from "next/navigation";
 import styles from "./admin.module.css";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import AdminPosts from "@/components/adminPosts/adminPosts";
 import AdminPostForm from "@/components/adminPostForm/adminPostForm";
 import AdminUsers from "@/components/adminUsers/adminUsers";
 
-export const metadata = {
-  title: "Admin",
-  description:
-    "Essa é a página de administração do site, onde você pode gerenciar usuários, posts, e outras funcionalidades!",
-};
+// export const metadata = {
+//   title: "Admin",
+//   description:
+//     "Essa é a página de administração do site, onde você pode gerenciar usuários, posts, e outras funcionalidades!",
+// };
 
 const AdminPage = async () => {
-  const user = await getAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getAuth().then((data) => setUser(data));
+  }, []);
+
+  useEffect(() => {
+    document.title = "Admin | INSIGHT";
+  }, []);
+
+  if (user === null) {
+    return <p>Loading...</p>;
+  }
 
   if (!user.isAdmin) {
     redirect("/");

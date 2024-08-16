@@ -23,7 +23,7 @@ const UserCard = ({ user }) => {
           className={`${isStudent ? styles.isStudent : styles.active}`}
           onClick={handleSetStudent}
         >
-          {isStudent ? "Desinscrever" : "Inscrever"}
+          {isStudent ? "Inscrito" : "Inscrever"}
         </button>
         <form action={deleteUser}>
           <input type="hidden" name="id" value={user.id} />
