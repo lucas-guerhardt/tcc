@@ -4,7 +4,7 @@ import styles from "./practice.module.css";
 import PostCard from "@/components/post-card/post-card";
 import { useEffect, useState } from "react";
 
-const PracticePage = async () => {
+const PracticePage = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
 

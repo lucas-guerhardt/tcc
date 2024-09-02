@@ -12,11 +12,20 @@ const UserCard = ({ user }) => {
     setIsStudent(updatedUser.isStudent);
   };
 
+  const atualizaPagina = () => {
+    window.location.reload();
+  };
+
   return (
     <div className={styles.user}>
       <div className={styles.detail}>
-        <Image src="/noavatar.png" alt="" width={50} height={50} />
+        {user.img ? (
+          <Image src={user.img} alt="" width={50} height={50} />
+        ) : (
+          <Image src="/noavatar.png" alt="" width={50} height={50} />
+        )}
         <span className={styles.userUsername}>{user.username}</span>
+        <span className={styles.userUsername}>{user.rankPoints}</span>
       </div>
       <div className={styles.buttons}>
         <button
@@ -27,7 +36,9 @@ const UserCard = ({ user }) => {
         </button>
         <form action={deleteUser}>
           <input type="hidden" name="id" value={user.id} />
-          <button className={styles.userButton}>Remover</button>
+          <button className={styles.userButton} onClick={atualizaPagina}>
+            Remover
+          </button>
         </form>
       </div>
     </div>

@@ -12,6 +12,7 @@ const Links = ({ user }) => {
   const links = [
     { name: "Página Inicial", path: "/" },
     { name: "Pratique", path: "/practice" },
+    { name: "Ranking", path: "/ranking" },
     { name: "Avalie-me", path: "/rate" },
     { name: "Sobre", path: "/about" },
   ];
@@ -35,8 +36,8 @@ const Links = ({ user }) => {
   return (
     <div className={styles.container}>
       <div className={styles.links}>
-        {links.map((links) => (
-          <NavLink item={links} key={links.name} />
+        {links.map((link) => (
+          <NavLink item={link} key={link.name} />
         ))}
         {user ? (
           <>
@@ -60,7 +61,7 @@ const Links = ({ user }) => {
       {open && (
         <div className={styles.mobileLinks} ref={mobileMenuRef}>
           {links.map((link) => (
-            <div key={links.name} onClick={handleLinkClick}>
+            <div key={link.name} onClick={handleLinkClick}>
               <NavLink item={link} key={link.name} />
             </div>
           ))}

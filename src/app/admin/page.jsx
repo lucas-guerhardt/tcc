@@ -1,20 +1,15 @@
 "use client";
 import { getAuth } from "@/lib/data";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import styles from "./admin.module.css";
 import { Suspense, useEffect, useState } from "react";
 import AdminPosts from "@/components/adminPosts/adminPosts";
 import AdminPostForm from "@/components/adminPostForm/adminPostForm";
 import AdminUsers from "@/components/adminUsers/adminUsers";
 
-// export const metadata = {
-//   title: "Admin",
-//   description:
-//     "Essa é a página de administração do site, onde você pode gerenciar usuários, posts, e outras funcionalidades!",
-// };
-
-const AdminPage = async () => {
+const AdminPage = () => {
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     getAuth().then((data) => setUser(data));
@@ -24,12 +19,14 @@ const AdminPage = async () => {
     document.title = "Admin | INSIGHT";
   }, []);
 
+  useEffect(() => {
+    if (user && !user.isAdmin) {
+      router.push("/");
+    }
+  }, [user, router]);
+
   if (user === null) {
     return <p>Loading...</p>;
-  }
-
-  if (!user.isAdmin) {
-    redirect("/");
   }
 
   return (
