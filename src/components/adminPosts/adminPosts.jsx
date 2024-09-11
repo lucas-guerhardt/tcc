@@ -4,7 +4,7 @@ import styles from "./adminPosts.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const AdminPosts = async () => {
+const AdminPosts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     getPosts().then((data) => setPosts(data));

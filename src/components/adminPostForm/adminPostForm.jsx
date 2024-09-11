@@ -2,7 +2,7 @@
 import { createPost } from "@/lib/data";
 import styles from "./adminPostForm.module.css";
 
-const AdminPostForm = async () => {
+const AdminPostForm = () => {
   const atualizaPagina = () => {
     window.location.reload();
   };
