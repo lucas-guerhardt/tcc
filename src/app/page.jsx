@@ -12,8 +12,8 @@ const Home = () => {
       <div className={styles.txtContainer}>
         <h1 className={styles.title}>Você está a um sopro da clareza.</h1>
         <p className={styles.desc}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-          harum, aliquid laboriosam explicabo dolor odit soluta?
+          Insight é uma ferramenta para auxiliar seus estudos e te ajudar a
+          esclarecer conceitos apresentados em aula.
         </p>
         <div className={styles.buttons}>
           <button

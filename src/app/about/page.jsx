@@ -13,18 +13,21 @@ const AboutPage = () => {
       <div className={styles.textContainer}>
         <h2 className={styles.title}>Sobre o projeto</h2>
         <h1 className={styles.biggerTitle}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Está difícil visualizar? Tenha um Insight.
         </h1>
         <p className={styles.text}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quisquam
-          illum error repellendus nemo impedit deserunt numquam ratione maiores
-          enim, rerum aut asperiores quas! Reiciendis maxime repellendus
-          veritatis officiis placeat.
+          Insight é uma aplicação destinada a auxiliar os professores a lecionar
+          o conteúdo de Análise Combinatória de forma mais didática e visual. A
+          aplicação foi desenvolvida com o intuito de facilitar o entendimento
+          de conteúdos abstratos e de difícil visualização, como é o caso da
+          Análise Combinatória. A aplicação foi desenvolvida com base em
+          conceitos de Design Thinking e Design de Interação, com o objetivo de
+          tornar a experiência do usuário mais agradável e intuitiva.
         </p>
       </div>
       <div className={styles.imgContainer}>
         <Image
-          src="/about.png"
+          src="/Lightbulb-rafiki.png"
           alt="About Image"
           fill
           sizes="max-width: 100%"
