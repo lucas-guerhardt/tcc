@@ -1,0 +1,57 @@
+.container {
+  margin-top: 50px;
+}
+
+.first,
+.second,
+.third {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.fbar,
+.sbar,
+.tbar {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 0%;
+  transition: width 3s ease;
+}
+
+.fbar {
+  background-color: goldenrod;
+}
+
+.sbar {
+  background-color: silver;
+}
+
+.tbar {
+  background-color: #cd7f32;
+}
+
+.fnumber,
+.snumber,
+.tnumber {
+  margin-right: 20px;
+}
+
+.fnumber {
+  font-size: 2rem;
+}
+
+.snumber {
+  font-size: 1.2rem;
+}
+
+.rankCard {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
