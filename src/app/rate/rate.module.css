@@ -1,63 +1,76 @@
-.container{
-    display: flex;
-    align-items: center;
-    gap: 100px;
+.container {
+  display: flex;
+  align-items: center;
+  gap: 100px;
 }
 
-.imgContainer{
-    flex: 1;
-    position: relative;
-    height: 500px;
+.title {
+  font-size: 5rem;
+  font-weight: bold;
+  color: var(--text);
 }
 
-.imgRate{
-    object-fit: contain;
+.desc {
+  font-size: 1rem;
+  color: var(--text);
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 
-.formContainer{
-    flex: 1;
-    gap: 20px;
-    align-items: column;
+.imgContainer {
+  flex: 1;
+  position: relative;
+  height: 500px;
 }
 
-.form{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.imgRate {
+  object-fit: contain;
 }
 
-.form input, 
-.form textarea{
-    padding: 20px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background-color: var(--bgSoft);
-    color: var(--text);
+.formContainer {
+  flex: 1;
+  gap: 20px;
+  align-items: column;
 }
 
-.form textarea{
-    resize: none;
-    height: 200px;
-    width: 700px;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.form button{
-    padding: 20px;
-    background-color: var(--btn);
-    color: var(--text);
-    border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+.form input,
+.form textarea {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: var(--bgSoft);
+  color: var(--text);
 }
 
-@media(max-width: 1024px){
-    .imgContainer{
-        display: none;
-    }
+.form textarea {
+  resize: none;
+  height: 200px;
+  width: 700px;
+}
 
-    .form textarea{
-        width: 100%;
-    }
+.form button {
+  padding: 20px;
+  background-color: var(--btn);
+  color: var(--text);
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .imgContainer {
+    display: none;
+  }
+
+  .form textarea {
+    width: 100%;
+  }
 }

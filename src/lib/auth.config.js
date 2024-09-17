@@ -10,8 +10,13 @@ export const authConfig = {
       const isOnPracticePage =
         request.nextUrl?.pathname.startsWith("/practice");
       const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
+      const isOnRatePage = request.nextUrl?.pathname.startsWith("/rate");
 
       if (isOnAdminPage && !user) {
+        return false;
+      }
+
+      if (isOnRatePage && !user) {
         return false;
       }
 

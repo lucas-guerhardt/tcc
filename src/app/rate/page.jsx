@@ -21,16 +21,14 @@ const RatePage = () => {
         />
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
-          <input type="text" placeholder="Nome e Sobrenome" />
-          <input type="email" placeholder="Endereço de Email" />
-          <input type="text" placeholder="Número de Telefone (Opcional)" />
-          <textarea
-            name=""
-            id=""
-            placeholder="Dê Sua Opinião Sobre o Site"
-          ></textarea>
-          <button>Enviar</button>
+        <h1 className={styles.title}>Avalie-me</h1>
+        <p className={styles.desc}>
+          Aqui você discorre sobre o que achou do site, o que pode ser
+          melhorado, o que gostou, o que não gostou, enfim, sua opinião é muito
+          importante para nós!
+        </p>
+        <form action={process.env.RATE} className={styles.form}>
+          <button>Clique para acessar o formulário</button>
         </form>
       </div>
     </div>
