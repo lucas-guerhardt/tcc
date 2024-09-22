@@ -60,6 +60,7 @@ const Home = () => {
       </div>
       <div className={styles.imgContainer}>
         <Image
+          unoptimized
           src="/hero.gif"
           alt=""
           fill
