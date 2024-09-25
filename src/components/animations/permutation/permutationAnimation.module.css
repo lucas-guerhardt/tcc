@@ -3,13 +3,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 1200px;
   margin: 40px auto;
-  padding: 20px;
   font-family: "Arial", sans-serif;
 }
 
-.example {
+.exampleBox {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +25,8 @@
   margin-bottom: 20px;
   border: 2px solid #ccc;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--bgSoft);
 }
 
 .button {
@@ -78,7 +78,7 @@
 }
 
 .explanationText {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
   color: var(--text);
   margin-bottom: 20px;
@@ -90,7 +90,7 @@
 }
 
 .exampleList li {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--textSoft);
   margin-bottom: 10px;
   position: relative;
@@ -101,7 +101,7 @@
   content: "•";
   position: absolute;
   left: 0;
-  color: #0070f3;
+  color: var(--btn);
 }
 
 .highlighted {
@@ -116,4 +116,45 @@
 
 .highlighted:hover {
   background-color: rgba(255, 215, 0, 0.4);
+}
+
+.exampleTitle {
+  margin: 10px auto;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.nextBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin: auto;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.nextBtn:hover {
+  background-color: #003c7b;
+}
+
+.nfat {
+  font-size: 48px;
+  color: var(--text);
+  border: 1px solid var(--bgSoft);
+  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  max-width: fit-content;
+  transition: background-color 0.3s ease-in-out;
+  margin: 20px auto;
+}
+
+.n {
+  font-size: 24px;
+}
+
+.nfat:hover {
+  background-color: var(--bgSoft);
 }
