@@ -20,9 +20,9 @@ const AboutPage = () => {
           o conteúdo de Análise Combinatória de forma mais didática e visual. A
           aplicação foi desenvolvida com o intuito de facilitar o entendimento
           de conteúdos abstratos e de difícil visualização, como é o caso da
-          Análise Combinatória. A aplicação foi desenvolvida com base em
-          conceitos de Design Thinking e Design de Interação, com o objetivo de
-          tornar a experiência do usuário mais agradável e intuitiva.
+          Análise Combinatória. A mesma utiliza conceitos de Design Thinking e
+          Design de Interação, com o objetivo de tornar a experiência do usuário
+          mais agradável e intuitiva.
         </p>
       </div>
       <div className={styles.imgContainer}>

@@ -8,7 +8,8 @@ const LoginPage = async () => {
         <Image src="/Login-rafiki.png" alt="" fill className={styles.img} />
       </div>
       <div className={styles.txtContainer}>
-        <h1 className={styles.title}>Entre sem cadastro!</h1>
+        <h1 className={styles.title}>Entre sem cadastro</h1>
+        <h1 className={styles.subtitle}>Entre com Google!</h1>
         <div className={styles.connectBtn}>
           <form action={handleGoogleLogin}>
             <button className={styles.google}>Entrar com Google</button>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getPostBySlug } from "@/lib/data";
 import styles from "./single-exercise.module.css";
 import PermutationAnimation from "@/components/animations/permutation/permutationAnimation";
@@ -16,15 +15,6 @@ const SingleExcercisePage = async ({ params }) => {
   const post = await getPostBySlug(slug);
   return (
     <div className={styles.container}>
-      {post.img ? (
-        <div className={styles.imgContainer}>
-          <Image src={post.img} alt="" fill className={styles.img} />
-        </div>
-      ) : (
-        <div className={styles.imgContainer}>
-          <Image src="/PadraoIA.webp" alt="" fill className={styles.img} />
-        </div>
-      )}
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.desc}>{post.description}</p>
