@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import styles from "./permutationAnimation.module.css";
 import pages from "./pages";
-import Permutator from "./permutator/permutator";
+import Permuter from "./permuter/permuter";
 
 const PermutationAnimation = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -43,7 +43,7 @@ const PermutationAnimation = () => {
       </div>
 
       <div className={styles.permutatorContainer}>
-        <Permutator />
+        <Permuter />
       </div>
     </div>
   );
