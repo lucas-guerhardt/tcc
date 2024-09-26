@@ -1,0 +1,81 @@
+.exampleBox {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  font-weight: 500;
+  color: rgb(7, 7, 58);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: -6px 6px 10px 1px var(--bgSoft);
+  min-height: 500px;
+  max-height: fit-content;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.exampleBox:hover {
+  box-shadow: -6px 6px 1px 1px var(--bgSoft);
+}
+
+.exampleTitle {
+  margin: 10px auto;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--bgSoft);
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.permutationDisplay {
+  font-size: 96px;
+  font-weight: bold;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.controlButton {
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.speedDisplay {
+  font-size: 18px;
+  margin: 5px;
+}
+
+.permutationNum {
+  color: darkgray;
+  font-size: 16px;
+  margin-top: 10px;
+}

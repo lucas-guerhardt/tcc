@@ -9,7 +9,8 @@ const pages = [
           formas possíveis! Imagine que você tem uma caixa cheia de letras. Você
           joga essas letras para o ar, e cada vez que elas caem no chão, elas
           formam uma nova ordem. Esse processo de rearranjar as letras é o que a
-          gente chama de <span className={styles.highlighted}>permutação</span>.
+          gente chama de{" "}
+          <span className={styles.highlighted}>permutação simples</span>.
         </p>
       </>
     ),
@@ -91,8 +92,9 @@ const pages = [
       <>
         <p className={styles.explanationText}>
           Portanto, ao invés de ficarmos contanto todas as possibilidades de
-          permutações em cada conjunto de caracteres, basta utilizarmos a
-          fórmula do fatorial para calcular o número de permutações possíveis:
+          permutações em cada conjunto de coisas, basta utilizarmos a fórmula do{" "}
+          <span className={styles.highlighted}>fatorial</span> para calcular o
+          número de permutações possíveis:
         </p>
         <h2 className={styles.nfat}>
           P<span className={styles.n}>n</span> = n!

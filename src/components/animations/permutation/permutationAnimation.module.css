@@ -1,127 +1,83 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 40px auto;
-  font-family: "Arial", sans-serif;
+  margin-top: 50px;
+  position: relative;
 }
 
-.exampleBox {
+.explanationContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 40px auto;
-  padding: 10px;
-  background-color: var(--bgSoft);
+  flex-direction: row;
+  background-color: aliceblue;
+  font-weight: 500;
+  color: rgb(7, 7, 58);
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+  box-shadow: -6px 6px 10px 1px var(--bgSoft);
+  min-height: 500px;
+  max-height: fit-content;
+  transition: box-shadow 0.3s ease-in-out;
+  position: relative;
 }
 
-.input {
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--bgSoft);
+.explanationContainer:hover {
+  box-shadow: -6px 6px 1px 1px var(--bgSoft);
 }
 
-.button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.permutationDisplay {
-  font-size: 96px;
-  font-weight: bold;
-  height: 50px;
+.permutatorContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 25%;
+  min-height: 500px;
+  max-height: 500px;
+  margin: 20px;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.controlButton {
-  padding: 10px 20px;
-  font-size: 20px;
-  margin: 5px;
-  cursor: pointer;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.speedDisplay {
-  font-size: 18px;
-  margin: 5px;
-}
-
-.permutationNum {
-  color: darkgray;
-  font-size: 16px;
-  margin-top: 10px;
+@media (max-width: 1280px) {
+  .container {
+    flex-direction: column;
+  }
 }
 
 .explanationText {
   font-size: 20px;
-  line-height: 1.6;
-  color: var(--text);
+  line-height: 1.8;
   margin-bottom: 20px;
 }
 
 .exampleList {
-  padding-left: 20px;
   list-style-type: none;
 }
 
 .exampleList li {
   font-size: 20px;
-  color: var(--textSoft);
   margin-bottom: 10px;
   position: relative;
-  padding-left: 15px;
+  padding-left: 40px;
 }
 
 .exampleList li:before {
   content: "•";
   position: absolute;
-  left: 0;
+  left: 20px;
   color: var(--btn);
 }
 
 .highlighted {
-  color: gold;
+  color: rgb(220, 59, 86);
   font-weight: bold;
   font-style: italic;
-  background-color: rgba(255, 215, 0, 0.2);
+  background-color: pink;
   padding: 2px 5px;
   border-radius: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .highlighted:hover {
-  background-color: rgba(255, 215, 0, 0.4);
-}
-
-.exampleTitle {
-  margin: 10px auto;
-  margin-bottom: 15px;
-  font-size: 24px;
+  background-color: rgb(255, 220, 226);
 }
 
 .nextBtn {
@@ -134,6 +90,9 @@
   border-radius: 20px;
   margin: auto;
   transition: background-color 0.1s ease-in-out;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 .nextBtn:hover {
@@ -142,13 +101,15 @@
 
 .nfat {
   font-size: 48px;
-  color: var(--text);
-  border: 1px solid var(--bgSoft);
-  box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+  font-style: italic;
+  font-family: serif;
+  color: rgb(7, 7, 58);
+  border-radius: 10px;
+  border: none;
   padding: 10px;
   max-width: fit-content;
-  transition: background-color 0.3s ease-in-out;
   margin: 20px auto;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .n {
@@ -156,5 +117,27 @@
 }
 
 .nfat:hover {
-  background-color: var(--bgSoft);
+  box-shadow: 0 0 10px 1px var(--bgSoft);
+}
+
+.pageIndicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.pageIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: lightgray;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.pageIndicator.active {
+  background-color: #0070f3;
 }
