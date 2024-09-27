@@ -7,6 +7,7 @@ const Permuter = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [speed, setSpeed] = useState(2500);
   const [letterColors, setLetterColors] = useState({});
+  const [isPermutating, setIsPermutating] = useState(false);
   const letterRefs = useRef([]);
   const positions = useRef([]);
 
@@ -30,6 +31,14 @@ const Permuter = () => {
     const permutedWords = permute(word);
     setPermutations(permutedWords);
     setCurrentIndex(0);
+    setIsPermutating(true);
+  };
+
+  const resetPermutation = () => {
+    setIsPermutating(false);
+    setWord("");
+    setPermutations([]);
+    setCurrentIndex(0);
   };
 
   const increaseSpeed = () => {
@@ -40,34 +49,35 @@ const Permuter = () => {
     setSpeed((prevSpeed) => Math.min(5000, prevSpeed + 100));
   };
 
-  const defineFixedPositions = () => {
-    const baseX = 50;
-    const baseY = 0;
-    const newPositions = [];
-
-    for (let i = 0; i < word.length; i++) {
-      newPositions.push({
-        x: i * baseX,
-        y: baseY,
-      });
-    }
-
-    positions.current = newPositions;
-  };
-
-  // Function to assign a consistent color to each unique letter
-  const assignColors = () => {
-    const uniqueLetters = [...new Set(word.split(""))]; // Get unique letters
-    const colors = {};
-    uniqueLetters.forEach((letter, index) => {
-      colors[letter] = `hsl(${(index * 360) / uniqueLetters.length}, 70%, 60%)`;
-    });
-    setLetterColors(colors); // Save the color mapping
-  };
-
   useEffect(() => {
+    const defineFixedPositions = () => {
+      const baseX = 50;
+      const baseY = -18;
+      const newPositions = [];
+
+      for (let i = 0; i < word.length; i++) {
+        newPositions.push({
+          x: i * baseX - baseX * (word.length / 2),
+          y: baseY,
+        });
+      }
+
+      positions.current = newPositions;
+    };
+
+    const assignColors = () => {
+      const uniqueLetters = word.split("");
+      const colors = {};
+      uniqueLetters.forEach((letter, index) => {
+        colors[letter] = `hsl(${
+          (index * 360) / uniqueLetters.length
+        }, 70%, 60%)`;
+      });
+      setLetterColors(colors);
+    };
+
     if (word.length > 0) {
-      assignColors(); // Assign colors when word is updated
+      assignColors();
       defineFixedPositions();
     }
   }, [word]);
@@ -125,7 +135,7 @@ const Permuter = () => {
         ref={(el) => (letterRefs.current[index] = el)}
         className={styles.letter}
         style={{
-          backgroundColor: letterColors[letter], // Use the stored color for each letter
+          backgroundColor: letterColors[letter],
           position: "absolute",
           left: `${positions.current[index]?.x}px` || "0px",
           top: `${positions.current[index]?.y}px` || "0px",
@@ -138,31 +148,34 @@ const Permuter = () => {
 
   return (
     <div className={styles.exampleBox}>
-      <h1 className={styles.exampleTitle}>Permutador</h1>
-      <input
-        type="text"
-        value={word}
-        onChange={(e) => setWord(e.target.value)}
-        placeholder="Digite uma palavra"
-        className={styles.input}
-        maxLength={7}
-      />
-      <button
-        onClick={startPermutation}
-        className={styles.button}
-        disabled={word === ""}
-      >
-        Iniciar Permutação
-      </button>
+      <div className={`${styles.inputContainer}`}>
+        <input
+          type="text"
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
+          placeholder="Insira seu conjunto"
+          className={`${styles.input} ${isPermutating ? styles.hidden : ""}`}
+          maxLength={7}
+        />
+
+        <button
+          onClick={isPermutating ? resetPermutation : startPermutation}
+          className={`${styles.button} ${isPermutating ? styles.restart : ""}`}
+          disabled={word === "" && !isPermutating}
+        >
+          {isPermutating ? "↻" : "►"}
+        </button>
+      </div>
 
       {permutations.length > 0 && (
-        <>
+        <div className={`${styles.displayContainer} ${styles.fadeIn}`}>
           <div className={styles.permutationDisplay}>{getLetters()}</div>
           <div className={styles.permutationNum}>
             {currentIndex + 1} / {permutations.length}
           </div>
-        </>
+        </div>
       )}
+
       <div className={styles.controls}>
         <span className={styles.speedDisplay}>Velocidade: {speed}ms</span>
         <button onClick={decreaseSpeed} className={styles.controlButton}>

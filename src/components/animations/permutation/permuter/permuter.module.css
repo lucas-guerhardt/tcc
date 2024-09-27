@@ -1,45 +1,68 @@
+.hidden {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
 .exampleBox {
   display: flex;
   flex-direction: column;
-  background-color: aliceblue;
   font-weight: 500;
-  color: rgb(7, 7, 58);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: -6px 6px 10px 1px var(--bgSoft);
-  min-height: 500px;
-  max-height: fit-content;
-  transition: box-shadow 0.3s ease-in-out;
+  max-width: fit-content;
+  position: relative;
+  align-items: center;
 }
 
-.exampleBox:hover {
-  box-shadow: -6px 6px 1px 1px var(--bgSoft);
-}
-
-.exampleTitle {
-  margin: 10px auto;
-  margin-bottom: 15px;
-  font-size: 24px;
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 15px;
 }
 
 .input {
+  margin: 5px;
   padding: 10px;
   font-size: 16px;
-  margin-bottom: 20px;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--bgSoft);
+  transition: opacity 0.3s ease-in-out;
 }
 
 .button {
-  padding: 10px 20px;
+  padding: 10px;
+  margin: 5px;
   font-size: 16px;
   cursor: pointer;
   background-color: #0070f3;
   color: white;
   border: none;
   border-radius: 4px;
+  transition: transform 1s ease;
+}
+
+.restart {
+  padding: 10px;
+  font-size: 0;
+  border-radius: 4px;
+  transform: translateX(-110px);
+}
+
+.restart::before {
+  content: "\21BA";
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.displayContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+}
+
+.fadeIn {
+  opacity: 1;
 }
 
 .permutationDisplay {
@@ -83,7 +106,7 @@
 
 .speedDisplay {
   font-size: 18px;
-  margin: 5px;
+  color: rgb(7, 7, 58);
 }
 
 .permutationNum {

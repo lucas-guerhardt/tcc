@@ -7,33 +7,26 @@
   position: relative;
 }
 
-.explanationContainer {
-  display: flex;
-  flex-direction: row;
-  background-color: aliceblue;
-  font-weight: 500;
-  color: rgb(7, 7, 58);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: -6px 6px 10px 1px var(--bgSoft);
-  min-height: 500px;
-  max-height: fit-content;
-  transition: box-shadow 0.3s ease-in-out;
-  position: relative;
-}
-
-.explanationContainer:hover {
-  box-shadow: -6px 6px 1px 1px var(--bgSoft);
-}
-
-.permutatorContainer {
+.explanation {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 500px;
-  max-height: 500px;
-  margin: 20px;
+  background-color: aliceblue;
+  font-weight: 500;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: -6px 6px 10px 1px var(--bgSoft);
+
+  max-height: fit-content;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.explanation:hover {
+  box-shadow: -6px 6px 1px 1px var(--bgSoft);
+}
+
+.explanationContainer {
+  color: rgb(7, 7, 58);
 }
 
 @media (max-width: 1280px) {

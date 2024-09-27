@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./permutationAnimation.module.css";
 import pages from "./pages";
 import Permuter from "./permuter/permuter";
@@ -21,14 +21,14 @@ const PermutationAnimation = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.explanationContainer}>
-        <div className={styles.explanation}>
+      <div className={styles.explanation}>
+        <div className={styles.explanationContainer}>
           {pages[currentPage].content}
           <button className={styles.nextBtn} onClick={nextPage}>
             Próximo
           </button>
         </div>
-
+        <Permuter />
         <div className={styles.pageIndicators}>
           {pages.map((_, index) => (
             <div
@@ -40,10 +40,6 @@ const PermutationAnimation = () => {
             ></div>
           ))}
         </div>
-      </div>
-
-      <div className={styles.permutatorContainer}>
-        <Permuter />
       </div>
     </div>
   );
