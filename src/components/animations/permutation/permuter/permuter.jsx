@@ -66,7 +66,7 @@ const Permuter = () => {
     };
 
     const assignColors = () => {
-      const uniqueLetters = word.split("");
+      const uniqueLetters = [...new Set(word.split(""))];
       const colors = {};
       uniqueLetters.forEach((letter, index) => {
         colors[letter] = `hsl(${
@@ -99,9 +99,19 @@ const Permuter = () => {
       const currentWord = permutations[currentIndex];
       const prevWord = permutations[currentIndex - 1];
 
+      const usedRefs = new Set();
+
       currentWord.split("").forEach((letter, index) => {
         const letterDiv = letterRefs.current[index];
-        const prevIndex = prevWord.indexOf(letter);
+
+        let prevIndex = -1;
+        for (let i = 0; i < prevWord.length; i++) {
+          if (prevWord[i] === letter && !usedRefs.has(i)) {
+            prevIndex = i;
+            usedRefs.add(i);
+            break;
+          }
+        }
 
         if (
           prevIndex !== index &&
@@ -129,21 +139,24 @@ const Permuter = () => {
   const getLetters = () => {
     const currentWord = permutations[currentIndex] || word;
 
-    return currentWord.split("").map((letter, index) => (
-      <div
-        key={index}
-        ref={(el) => (letterRefs.current[index] = el)}
-        className={styles.letter}
-        style={{
-          backgroundColor: letterColors[letter],
-          position: "absolute",
-          left: `${positions.current[index]?.x}px` || "0px",
-          top: `${positions.current[index]?.y}px` || "0px",
-        }}
-      >
-        {letter}
-      </div>
-    ));
+    return currentWord.split("").map((letter, index) => {
+      const key = letter + index;
+      return (
+        <div
+          key={key}
+          ref={(el) => (letterRefs.current[index] = el)}
+          className={styles.letter}
+          style={{
+            backgroundColor: letterColors[letter],
+            position: "absolute",
+            left: `${positions.current[index]?.x}px` || "0px",
+            top: `${positions.current[index]?.y}px` || "0px",
+          }}
+        >
+          {letter}
+        </div>
+      );
+    });
   };
 
   return (
