@@ -6,22 +6,20 @@ import Permuter from "./permuter/permuter";
 
 const PermutationAnimation = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false); // Controlar a animação
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const nextPage = () => {
-    // Adiciona animação de escala quando mudar de página
     setIsAnimating(true);
 
     setTimeout(() => {
       setIsAnimating(false);
 
-      // Atualiza a página depois da animação
       if (currentPage < pages.length - 1) {
         setCurrentPage((prevPage) => prevPage + 1);
       } else {
         setCurrentPage(0);
       }
-    }, 300); // Duração da animação de 300ms
+    }, 300);
   };
 
   const goToPage = (pageIndex) => {

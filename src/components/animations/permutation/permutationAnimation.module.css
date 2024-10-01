@@ -39,29 +39,20 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.postIt {
-  background-color: #fffa65;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  width: fit-content;
-  position: relative;
-}
-
 .highlighted {
-  color: rgb(220, 59, 86);
+  color: rgb(34, 46, 156);
   font-weight: bold;
   font-style: italic;
-  background-color: pink;
+  background-color: rgb(192, 199, 255);
   padding: 2px 5px;
   border-radius: 5px;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
 
 .highlighted:hover {
-  background-color: rgb(255, 220, 226);
+  background-color: rgb(173, 252, 255);
 }
+
 .explanationText {
   font-size: 20px;
   line-height: 1.8;
