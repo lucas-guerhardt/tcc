@@ -7,8 +7,14 @@ import Permuter from "./permuter/permuter";
 const PermutationAnimation = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const nextPage = () => {
+    if (currentPage === pages.length - 1) {
+      setShowConfirmation(true);
+      return;
+    }
+
     setIsAnimating(true);
 
     setTimeout(() => {
@@ -16,8 +22,6 @@ const PermutationAnimation = () => {
 
       if (currentPage < pages.length - 1) {
         setCurrentPage((prevPage) => prevPage + 1);
-      } else {
-        setCurrentPage(0);
       }
     }, 300);
   };
@@ -26,36 +30,64 @@ const PermutationAnimation = () => {
     setCurrentPage(pageIndex);
   };
 
+  const startActivity = () => {
+    setShowConfirmation(false);
+  };
+
+  const cancelActivity = () => {
+    setShowConfirmation(false);
+    setCurrentPage(0);
+  };
+
   return (
     <div className={styles.container}>
-      <div
-        className={`${styles.explanationContainer} ${
-          isAnimating ? styles["scale-up"] : ""
-        }`}
-      >
-        <div className={styles.explanation}>
-          {pages[currentPage].content}
-          <button className={styles.nextBtn} onClick={nextPage}>
-            Próximo
+      {!showConfirmation ? (
+        <div
+          className={`${styles.explanationContainer} ${
+            isAnimating ? styles["scale-up"] : ""
+          }`}
+        >
+          <div className={styles.explanation}>
+            {pages[currentPage].content}
+            <button
+              className={`${styles.nextBtn} ${
+                currentPage === pages.length - 1 ? styles.startActivityBtn : ""
+              }`}
+              onClick={nextPage}
+            >
+              {currentPage === pages.length - 1
+                ? "Iniciar Atividade"
+                : "Próximo"}
+            </button>
+          </div>
+
+          <div className={styles.postIt}>
+            <Permuter />
+          </div>
+
+          <div className={styles.pageIndicators}>
+            {pages.map((_, index) => (
+              <div
+                key={index}
+                className={`${styles.pageIndicator} ${
+                  index === currentPage ? styles.active : ""
+                }`}
+                onClick={() => goToPage(index)}
+              ></div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.confirmationContainer}>
+          <p>Deseja realmente iniciar a nova atividade?</p>
+          <button className={styles.proceedBtn} onClick={startActivity}>
+            Prosseguir
+          </button>
+          <button className={styles.cancelBtn} onClick={cancelActivity}>
+            Cancelar
           </button>
         </div>
-
-        <div className={styles.postIt}>
-          <Permuter />
-        </div>
-
-        <div className={styles.pageIndicators}>
-          {pages.map((_, index) => (
-            <div
-              key={index}
-              className={`${styles.pageIndicator} ${
-                index === currentPage ? styles.active : ""
-              }`}
-              onClick={() => goToPage(index)}
-            ></div>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

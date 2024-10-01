@@ -83,7 +83,7 @@
   height: 50px;
   border-radius: 50%;
   background-color: #ffcc00;
-  color: black;
+  color: #003366;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -104,6 +104,55 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
+}
+
+.nextBtn:hover {
+  background-color: #003c7b;
+}
+
+.startActivityBtn {
+  background-color: green;
+}
+
+.confirmationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #003366;
+  background-color: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.proceedBtn,
+.cancelBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+.proceedBtn {
+  background-color: green;
+  color: white;
+}
+
+.proceedBtn:hover {
+  background-color: darkgreen;
+}
+
+.cancelBtn {
+  background-color: red;
+  color: white;
+}
+
+.cancelBtn:hover {
+  background-color: darkred;
 }
 
 .nextBtn:hover {
