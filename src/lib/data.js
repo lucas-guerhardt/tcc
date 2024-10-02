@@ -202,6 +202,21 @@ export const setStudent = async (id, status) => {
   }
 };
 
+export const setPoints = async (id, points) => {
+  try {
+    connectToDatabase();
+    const user = await getUser(id);
+    const userPoints = user.rankPoints + points;
+    await User.findByIdAndUpdate(id, { rankPoints: userPoints });
+    revalidatePath("/ranking");
+    revalidatePath("/admin");
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to set points");
+  }
+};
+
 export const deleteUser = async (formData) => {
   const { id } = Object.fromEntries(formData);
   try {
