@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { words, calculatePermutations, shuffleArray } from "./gameUtils";
 import styles from "./game.module.css";
 import { getAuth, setPoints } from "@/lib/data";
@@ -33,7 +33,7 @@ const Game = () => {
     getAuth().then((data) => setUser(data));
   }, []);
 
-  const generateWrongOptions = (correctPermutations, word) => {
+  const generateWrongOptions = (correctPermutations) => {
     if (correctPermutations < 120) {
       const wrongOption1 =
         correctPermutations + Math.floor(Math.random() * 10 + 1);
@@ -59,7 +59,22 @@ const Game = () => {
     }
   };
 
-  const startNewRound = () => {
+  const handleTimeout = useCallback(() => {
+    clearInterval(intervalId.current);
+    setFeedback("Tempo esgotado! Resposta computada como errada.");
+    setRoundResults((prevResults) => [...prevResults, false]);
+    setPointsState((prevPoints) => prevPoints - 5);
+
+    setTimeout(() => {
+      if (round < maxRounds - 1) {
+        setRound((prevRound) => prevRound + 1);
+      } else {
+        setShowBonus(true);
+      }
+    }, 500);
+  }, [round]);
+
+  const startNewRound = useCallback(() => {
     if (intervalId.current) {
       clearInterval(intervalId.current);
     }
@@ -95,7 +110,7 @@ const Game = () => {
         }
       });
     }, 1000);
-  };
+  }, [handleTimeout]);
 
   useEffect(() => {
     if (round < maxRounds) {
@@ -104,7 +119,7 @@ const Game = () => {
       setShowBonus(true);
       clearInterval(intervalId.current);
     }
-  }, [round]);
+  }, [startNewRound, round]);
 
   const handleOptionClick = (option) => {
     clearInterval(intervalId.current);
@@ -112,11 +127,11 @@ const Game = () => {
     if (option === correctOption) {
       setFeedback("Correto! Parabéns.");
       setRoundResults((prevResults) => [...prevResults, true]);
-      setPointsState((prevPoints) => prevPoints + 100);
+      setPointsState((prevPoints) => prevPoints + 5);
     } else {
       setFeedback("Errado! Tente novamente.");
       setRoundResults((prevResults) => [...prevResults, false]);
-      setPointsState((prevPoints) => prevPoints - 35);
+      setPointsState((prevPoints) => prevPoints - 5);
     }
 
     setTimeout(() => {
@@ -126,21 +141,6 @@ const Game = () => {
         setShowBonus(true);
       }
     }, 2000);
-  };
-
-  const handleTimeout = () => {
-    clearInterval(intervalId.current);
-    setFeedback("Tempo esgotado! Resposta computada como errada.");
-    setRoundResults((prevResults) => [...prevResults, false]);
-    setPointsState((prevPoints) => prevPoints - 35);
-
-    setTimeout(() => {
-      if (round < maxRounds - 1) {
-        setRound((prevRound) => prevRound + 1);
-      } else {
-        setShowBonus(true);
-      }
-    }, 500);
   };
 
   const handleEndGame = () => {
@@ -208,7 +208,7 @@ const Game = () => {
           />
         ))}
       </div>
-      <h2>Quantas permutações existem para a palavra "{word}"?</h2>
+      <h2>Quantas permutações existem para a palavra &quot;{word}&quot;?</h2>
       <div
         className={styles.timerBar}
         style={{
