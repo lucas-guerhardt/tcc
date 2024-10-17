@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { words, calculatePermutations, shuffleArray } from "./gameUtils";
+import {
+  words,
+  calculatePermutations,
+  shuffleArray,
+  generateWrongOptions,
+} from "./gameUtils";
 import styles from "./game.module.css";
 import { getAuth, setPoints } from "@/lib/data";
 
@@ -32,32 +37,6 @@ const Game = () => {
   useEffect(() => {
     getAuth().then((data) => setUser(data));
   }, []);
-
-  const generateWrongOptions = (correctPermutations) => {
-    if (correctPermutations < 120) {
-      const wrongOption1 =
-        correctPermutations + Math.floor(Math.random() * 10 + 1);
-      const wrongOption2 =
-        correctPermutations - Math.floor(Math.random() * 5 + 1);
-      const wrongOption3 =
-        correctPermutations + Math.floor(Math.random() * 20 + 5);
-      return [wrongOption1, wrongOption2, wrongOption3];
-    } else {
-      const wrongOption1 =
-        Math.round(
-          (correctPermutations + Math.floor(Math.random() * 100 + 1)) / 10
-        ) * 10;
-      const wrongOption2 =
-        Math.round(
-          (correctPermutations - Math.floor(Math.random() * 50 + 1)) / 10
-        ) * 10;
-      const wrongOption3 =
-        Math.round(
-          (correctPermutations + Math.floor(Math.random() * 200 + 50)) / 10
-        ) * 10;
-      return [wrongOption1, wrongOption2, wrongOption3];
-    }
-  };
 
   const handleTimeout = useCallback(() => {
     clearInterval(intervalId.current);
@@ -154,7 +133,6 @@ const Game = () => {
     window.location.href = "/practice";
   };
 
-  // Função para reiniciar o jogo
   const handleRestartGame = () => {
     setRound(0);
     setRoundResults([]);
@@ -191,7 +169,6 @@ const Game = () => {
     );
   }
 
-  // Renderizar o jogo
   return (
     <div className={styles.gameContainer}>
       <div className={styles.roundIndicators}>
