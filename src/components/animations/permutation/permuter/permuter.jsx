@@ -51,7 +51,7 @@ const Permuter = () => {
 
   useEffect(() => {
     const defineFixedPositions = () => {
-      const baseX = 50;
+      const baseX = 100;
       const baseY = -18;
       const newPositions = [];
 
