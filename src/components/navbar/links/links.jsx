@@ -13,7 +13,6 @@ const Links = ({ user }) => {
     { name: "Página Inicial", path: "/" },
     { name: "Pratique", path: "/practice" },
     { name: "Ranking", path: "/ranking" },
-    { name: "Avalie-me", path: "/rate" },
     { name: "Sobre", path: "/about" },
   ];
 
