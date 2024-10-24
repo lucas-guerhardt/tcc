@@ -66,7 +66,16 @@ const Permuter = () => {
     };
 
     const assignColors = () => {
-      const uniqueLetters = [...new Set(word.split(""))];
+      const letterMap = {}; // Substituição de Set por um objeto simples
+      const uniqueLetters = [];
+
+      word.split("").forEach((letter) => {
+        if (!letterMap[letter]) {
+          letterMap[letter] = true;
+          uniqueLetters.push(letter);
+        }
+      });
+
       const colors = {};
       uniqueLetters.forEach((letter, index) => {
         colors[letter] = `hsl(${
@@ -99,16 +108,16 @@ const Permuter = () => {
       const currentWord = permutations[currentIndex];
       const prevWord = permutations[currentIndex - 1];
 
-      const usedRefs = new Set();
+      const usedRefs = {};
 
       currentWord.split("").forEach((letter, index) => {
         const letterDiv = letterRefs.current[index];
 
         let prevIndex = -1;
         for (let i = 0; i < prevWord.length; i++) {
-          if (prevWord[i] === letter && !usedRefs.has(i)) {
+          if (prevWord[i] === letter && !usedRefs[i]) {
             prevIndex = i;
-            usedRefs.add(i);
+            usedRefs[i] = true;
             break;
           }
         }
