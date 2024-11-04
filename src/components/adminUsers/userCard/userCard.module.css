@@ -39,6 +39,25 @@
   cursor: pointer;
 }
 
+.isAdmin {
+  padding: 5px 10px;
+  background-color: rgba(178, 178, 178, 0.5);
+  color: var(--textColor);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.isAdmin:hover::after {
+  content: "Remover Admin";
+  padding: 5px 10px;
+  background-color: rgba(220, 20, 60, 1);
+  color: var(--textColor);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
 .active {
   padding: 5px 10px;
   background-color: rgba(17, 178, 23, 0.593);

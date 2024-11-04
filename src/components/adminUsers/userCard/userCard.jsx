@@ -1,15 +1,21 @@
 "use client";
-import { deleteUser, setStudent } from "@/lib/data";
+import { deleteUser, setStudent, setAdmin } from "@/lib/data";
 import styles from "./userCard.module.css";
 import Image from "next/image";
 import { useState } from "react";
 
 const UserCard = ({ user }) => {
   const [isStudent, setIsStudent] = useState(user.isStudent);
+  const [isAdmin, setIsAdmin] = useState(user.isAdmin);
 
   const handleSetStudent = async () => {
     const updatedUser = await setStudent(user.id, !isStudent);
     setIsStudent(updatedUser.isStudent);
+  };
+
+  const handleSetAdmin = async () => {
+    const updatedUser = await setAdmin(user.id, !isAdmin);
+    setIsAdmin(updatedUser.isAdmin);
   };
 
   const atualizaPagina = () => {
@@ -28,6 +34,12 @@ const UserCard = ({ user }) => {
         <span className={styles.userUsername}>{user.rankPoints}</span>
       </div>
       <div className={styles.buttons}>
+        <button
+          className={`${isAdmin ? styles.isAdmin : styles.active}`}
+          onClick={handleSetAdmin}
+        >
+          {isAdmin ? "Admin" : "Tornar Admin"}
+        </button>
         <button
           className={`${isStudent ? styles.isStudent : styles.active}`}
           onClick={handleSetStudent}

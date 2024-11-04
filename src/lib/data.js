@@ -202,6 +202,19 @@ export const setStudent = async (id, status) => {
   }
 };
 
+export const setAdmin = async (id, status) => {
+  try {
+    connectToDatabase();
+    await User.findByIdAndUpdate(id, { isAdmin: status });
+    const user = await getUser(id);
+    revalidatePath("/admin");
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to set admin");
+  }
+};
+
 export const setPoints = async (id, points) => {
   try {
     connectToDatabase();
