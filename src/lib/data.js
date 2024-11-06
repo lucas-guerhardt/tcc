@@ -158,6 +158,7 @@ export const getUserByEmail = async (email) => {
     console.log(error);
     //throw new Error("Failed to fetch user!");
     handleLogout();
+    return null;
   }
 };
 
