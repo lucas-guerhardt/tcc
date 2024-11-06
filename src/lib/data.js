@@ -4,6 +4,7 @@ import { connectToDatabase } from "./utils";
 import { Post, User } from "./models";
 import { unstable_noStore as revalidatePath } from "next/cache";
 import { auth } from "./auth";
+import { handleLogout } from "./action";
 
 export const createPost = async (formData) => {
   const { title, description, img, slug } = Object.fromEntries(formData);
@@ -155,7 +156,8 @@ export const getUserByEmail = async (email) => {
     return user;
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to fetch user!");
+    //throw new Error("Failed to fetch user!");
+    handleLogout();
   }
 };
 
